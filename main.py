@@ -7,6 +7,8 @@ from routers import products
 from database import Base, engine
 import models
 
+Base.metadata.create_all(bind=engine)
+
 app = fastapi.FastAPI()
 
 async def common_parameters(skip: int = 0, limit: Optional[int] = 100):

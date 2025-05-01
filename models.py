@@ -17,16 +17,20 @@ class ProductBase(BaseModel):
     description: Optional[str] = None
     price: float
     tax: Optional[float] = None
-
 class ProductCreate(ProductBase):
     pass
-
 class ProductRead(ProductBase):
     id: int
     class Config:
         orm_mode = True
-
 class ProductSummary(BaseModel):
     id: int
     name: str
     price: float
+
+class ProductSummaryCreate(ProductSummary):
+    pass
+class ProductSummaryRead(ProductSummary):
+    id: int
+    class Config:
+        orm_mode = True
