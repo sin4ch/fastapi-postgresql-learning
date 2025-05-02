@@ -3,7 +3,7 @@ from typing import List
 from sqlalchemy.orm import Session
 
 import models
-from main import common_parameters
+import dependencies
 from database import get_db
 
 router = APIRouter(
@@ -28,7 +28,7 @@ def create_product(product: models.ProductBase, db: Session = Depends(get_db)):
     return new_product
 
 @router.get("/", response_model=List[models.ProductSummaryRead])
-def get_products(db: Session = Depends(get_db), commons: dict = Depends(common_parameters)):
+def get_products(db: Session = Depends(get_db), commons: dict = Depends(dependencies.common_parameters)):
     skip = commons["skip"]
     limit = commons["limit"]
     products = db.query(models.ProductDB).offset(skip).limit(limit).all()

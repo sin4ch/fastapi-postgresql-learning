@@ -6,13 +6,11 @@ from routers import products
 
 from database import Base, engine
 import models
+import dependencies
 
 Base.metadata.create_all(bind=engine)
 
 app = fastapi.FastAPI()
-
-async def common_parameters(skip: int = 0, limit: Optional[int] = 100):
-    return {"skip": skip, "limit": limit}
 
 app.include_router(products.router)
 
@@ -25,7 +23,7 @@ def say_hello_to_person(name: str):
     return {"message": f"Hello, {name}"}
 
 @app.get("/items")
-def get_items(commons: dict = Depends(common_parameters)):
+def get_items(commons: dict = Depends(dependencies.common_parameters)):
     skip = commons["skip"]
     limit = commons["limit"]
     all_items = ["carrots", "cabbages", "fruits", "spinach", "brussel sprouts", "onions", "green pepper", "salt", "thyme", "curry", "ground pepper", "paprika"]

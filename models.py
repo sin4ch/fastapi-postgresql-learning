@@ -11,7 +11,6 @@ class ProductDB(Base):
     description = Column(String, nullable=True)
     price = Column(Float, nullable=False)
     tax = Column(Float, nullable=True)
-
 class ProductBase(BaseModel):
     name: str
     description: Optional[str] = None
